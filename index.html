@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Food Delight</title>
+     <!-- bootsrap css link -->
+     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+     <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+     <header>
+          <nav class="navbar navbar-light bg-light">
+               <div class="container">
+                 <a class="navbar-brand" href="#">
+                   <img src="/assets/img/ingredient.png" style="object-fit: cover;   " alt="" width="30" height="24" class="d-inline-block align-text-top">
+                   Food Delight
+                 </a>
+                 <a href="#"  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                    <img src="assets/img/image.png" style="width: 30px;height: 30px;" alt="" srcset="">
+                </a>
+               </div>
+             </nav>
+     </header>
+
+     <!-- off canvas -->
+     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+     <div class="offcanvas-header">
+     <h3>Cart Items</h3>
+     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+     </div>
+          <div id="cart">
+               
+          </div>
+     </div>
+
+     <section class="pt-5">
+          <div class="container">
+             <div class="row">
+               <h2 align="center" class="pb-5">Discover The Best Food</h2>
+               <div class="col-12 d-flex flex-wrap " id="cart-cards" >
+                    
+               </div>
+             </div>  
+          </div>
+     </section>
+
+     <script src="assets/js/bootstrap.bundle.min.js"></script>
+     <script src="assets/js/cart.js"></script>
+</body>
+</html>

@@ -6,18 +6,30 @@ let product = [
           id:2, name:"Masala cheese Dosa", image:'98.jpg',price:60, qty:1,
      },
      {
-          id:3, name:"paneer chilli",image:'99.jpg',price:80, qty:1,
+          id:3, name:"Macaroni pasta",image:'99.jpg',price:80, qty:1,
      },
      {
-          id:4, name:"paneer chilli",image:'100.jpg', price:100,qty:1,
+          id:4, name:"Fried Samosa",image:'100.jpg', price:100,qty:1,
+     },
+     {
+          id:5, name:"Pasta with Black Olives",image:'104.jpg', price:120,qty:1,
+     },
+     {
+          id:6, name:"Burger & Fries",image:'101.jpg', price:130,qty:1,
+     },
+     {
+          id:7, name:"Mendu vada",image:'102.jpg', price:150,qty:1,
+     },
+     {
+          id:8, name:"Pani puri",image:'103.jpg', price:70,qty:1,
      },
 ];
 // view of cards in index.html
 let tbl1="";
-const  viewcart=()=>{
+const  viewProduct=()=>{
      product.map((item)=>{
           return tbl1 += `
-          <div class="col-3 px-3">
+          <div class="col-3 px-3 py-2">
                <div class="card">
                     <img src="assets/img/${item.image}" class="card-img-top" style="padding: 10px;border-radius: 10px;height:300px;object-fit:cover;" alt="...">
 
@@ -33,34 +45,46 @@ const  viewcart=()=>{
      })
      document.getElementById('cart-cards').innerHTML=tbl1;
 }
-viewcart();
+viewProduct();
 
 let cart=[];
-
 const addtocart=(id)=>{
-     
+     let allcart = JSON.parse(localStorage.getItem('cart'))?JSON.parse(localStorage.getItem('cart')):[];
+     let dupcart = allcart.find((val)=>{
+           return val.id == id;
+     })
+     if(dupcart){
+      alert('already hai..');
+      return false;
+     }else{
+      alert(`Item added..`);     
+     }
+
           product.map((item)=>{
-               if(item.id==id){
-                    
-                    cart.push(item);
+               if(item.id == id){
+                    if(localStorage.getItem('cart')==null||localStorage.getItem('cart')==undefined){
+                         cart.push(item);
+                         localStorage.setItem('cart',JSON.stringify(cart));
+                    }
+
+                    else{
+                         let oldProducts = JSON.parse(localStorage.getItem('cart'));
+                         oldProducts.push(item);
+                         localStorage.setItem('cart',JSON.stringify(oldProducts));
+                    }
                }
+               
           })
-          alert('added to localstorage.');
-     
-          localStorage.setItem('cart',JSON.stringify(cart));
-    
-
-    
-
+         viewCart();    
 }
 
-const viewAddeditems=()=>{
+const viewCart=()=>{
 
      let products = JSON.parse(localStorage.getItem('cart'));
-     //console.log(products);
      let tbl2="";
-    
+    let sum=0;
      products.map((item)=>{ 
+          sum = sum + item.price*item.qty;
               return (
                tbl2 += `
                <div class="col-12 d-flex px-1 py-1">
@@ -70,8 +94,8 @@ const viewAddeditems=()=>{
                     <div class="col-5">
                          <div class="details px-4">
                               <p class="mb-0 text-danger fw-bold">${item.name}</p>
-                              <p class="mb-0 text-secondary fw-normal" >${item.price}</p>
-                              <input class="mb-0" type="number" value="1" style="width: 50px;">
+                              <p class="mb-0 text-secondary fw-normal"  >${item.price}</p>
+                              <input class="mb-0" type="number" value="${item.qty}" id="qty_${item.id}" onchange="editcart(${item.id})" style="width: 50px;">
                          </div>
                     </div>
                     <div class="col-2  d-flex align-items-center">
@@ -85,10 +109,11 @@ const viewAddeditems=()=>{
               )
      })
      document.getElementById('cart').innerHTML = tbl2;
-}
-viewAddeditems();
+     document.getElementById('finaltotal').innerHTML = `Total :- ${sum}`
 
-  
+}
+     viewCart();
+
 const deleteitem=(id)=>{
      let allitems = JSON.parse(localStorage.getItem('cart'));
      
@@ -97,9 +122,21 @@ const deleteitem=(id)=>{
      })
      console.log(deleteditems);
      localStorage.setItem('cart',JSON.stringify(deleteditems));
-     viewAddeditems();
+     viewCart();
 }
 //view of cart on offcanvas
+//edit price
 
+const editcart=(id)=>{
+     let qty = document.getElementById(`qty_${id}`).value;
+     let allcart = JSON.parse(localStorage.getItem('cart'));
+     allcart.map((item)=>{
+          if(item.id == id){
+               item.qty = qty;
+          }
+     })
+     localStorage.setItem('cart',JSON.stringify(allcart));
+     viewCart();
+}
 
 

@@ -8,7 +8,7 @@
      <link rel="stylesheet" href="assets/css/bootstrap.min.css">
      <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body style="background-color: antiquewhite;">
      <header>
           <nav class="navbar navbar-light bg-light">
                <div class="container">
@@ -16,15 +16,16 @@
                    <img src="/assets/img/ingredient.png" style="object-fit: cover;   " alt="" width="30" height="24" class="d-inline-block align-text-top">
                    Food Delight
                  </a>
-                 <a href="#"  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                 <a href="#" style="text-decoration: none;"  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
                     <img src="assets/img/image.png" style="width: 30px;height: 30px;" alt="" srcset="">
+                    <span id="count" style="color: black;"></span>
                 </a>
                </div>
              </nav>
      </header>
 
      <!-- off canvas -->
-     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+     <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" tabindex="-1">
      <div class="offcanvas-header">
      <h3>Cart Items</h3>
      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -32,13 +33,16 @@
           <div id="cart">
                
           </div>
+
+          <h3 id="finaltotal"></h3>
+          <button class="btn btn-secondary" style="width: 100px;">Place order</button>
      </div>
 
      <section class="pt-5">
           <div class="container">
              <div class="row">
                <h2 align="center" class="pb-5">Discover The Best Food</h2>
-               <div class="col-12 d-flex flex-wrap " id="cart-cards" >
+               <div class="col-12 d-flex flex-wrap" id="cart-cards" >
                     
                </div>
              </div>  
